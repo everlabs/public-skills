@@ -12,29 +12,20 @@ Install one by feeding it to your agent: copy the skill folder into your agent's
 
 Turns a screen-recording walkthrough (Loom, QuickTime, anything ffmpeg reads) into reviewable user-story specifications – each task with the exact screenshots the speaker was looking at when they said it. Record yourself thinking out loud while browsing the product you want to improve; get back clarified, delegable specs your AI agents (or team) can implement.
 
-How it works:
-
-```
-recording.mp4 (+ optional captions)
-        │
-        ▼
-frames cut @ 1 fps ──► perceptual-hash dedup ──► unique screen states only
-transcript         ──► provided SRT/VTT, or generated (local whisper / API)
-        │
-        ▼
-timeline: every spoken segment matched to the screen it was said on
-        │
-        ▼
-task extraction: direct asks, reversals ("scratch that" wins),
-dissatisfaction, and issues visible in the frames themselves
-        │
-        ▼
-docs/video-to-spec/<video>--<date>/
-├── index.md            summary + open questions
-├── 01-<task>.md        user story · motivation · screenshots · what to do
-├── 02-<task>.md
-└── frames/
-```
+<table>
+  <tr>
+    <th>How it works</th>
+    <th>What you get</th>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="assets/video-to-spec-scheme.svg" alt="How the skill works: a screen recording is split into deduplicated frames and a transcript, merged into a timeline, mined for tasks, and written out as a numbered spec folder.">
+    </td>
+    <td width="50%" valign="top">
+      <img src="assets/video-to-spec-example.svg" alt="A single spec file produced by the skill: task title, type and source timestamps, user story, the quoted remark it came from, and a wireframe of the screen it refers to.">
+    </td>
+  </tr>
+</table>
 
 The video is cut into one frame per second with ffmpeg, then deduplicated by perceptual hash (ImageMagick PHASH or Python `imagehash`) so mouse drift is ignored but real screen changes – modals, scrolls, navigation – survive. Each transcript segment is matched to the screen state that was visible when it was spoken, and the specs are drafted from that timeline with the screenshots embedded. One batch of clarifying questions at the end confirms anything ambiguous before the folder is final.
 
