@@ -1,10 +1,8 @@
 # public-skills
 
-Public skills for [Claude Code](https://claude.com/claude-code). Each skill is a self-contained folder with its own README, author credits, and everything it needs to run. Install one by copying it into your skills directory:
+Skills by Everlabs for AI coding agents – Claude Code, Codex, Cursor, OpenCode, Gemini CLI, and any other harness that supports the SKILL.md standard. Each skill is a self-contained folder with its own README, author credits, and everything it needs to run.
 
-```bash
-cp -R <skill-name> ~/.claude/skills/
-```
+Install one by feeding it to your agent: copy the skill folder into your agent's skills directory (e.g. `~/.claude/skills/` for Claude Code, `~/.codex/skills/` for Codex), or just tell your agent to install it from this repo.
 
 ## Skills
 
@@ -41,5 +39,3 @@ docs/video-to-spec/<video>--<date>/
 The video is cut into one frame per second with ffmpeg, then deduplicated by perceptual hash (ImageMagick PHASH or Python `imagehash`) so mouse drift is ignored but real screen changes – modals, scrolls, navigation – survive. Each transcript segment is matched to the screen state that was visible when it was spoken, and the specs are drafted from that timeline with the screenshots embedded. One batch of clarifying questions at the end confirms anything ambiguous before the folder is final.
 
 See the [skill README](video-to-spec/README.md) for install, dependencies, and transcription providers.
-
-*More skills coming. Contributions welcome – add a folder with a `SKILL.md` and a README crediting yourself.*
